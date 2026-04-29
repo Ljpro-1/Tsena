@@ -485,7 +485,7 @@ input, select, textarea{
     z-index: 99999;
 
     background: rgba(0, 0, 0, 0.5); /* 👈 transparence */
-    backdrop-filter: blur(0,5px); /* 👈 effet flou moderne */
+    backdrop-filter: blur(5px); /* 👈 effet flou moderne */
 
     color: white;
     border: none;
@@ -585,8 +585,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-window.auth = getAuth(app);
+const auth = getAuth(app);
 setPersistence(auth, browserLocalPersistence);
+window.auth = auth;
 window.db = getFirestore(app);
 
 
@@ -1485,13 +1486,13 @@ if(livraison && toeranaBox){
     }
     window.goPage2 = goPage2;
 
-    const loginButtons = document.querySelectorAll(".login-btn");
-    if(loginButtons.length > 1){
-        loginButtons[1].onclick = function(){
-            document.getElementById("page2").style.display = "none";
-            document.getElementById("page3").style.display = "block";
-        };
-    }
+const loginBtn = document.querySelector(".login-btn");
+if(loginBtn){
+    loginBtn.onclick = function(){
+        document.getElementById("page2").style.display = "none";
+        document.getElementById("page3").style.display = "block";
+    };
+}
 const buyBtn = document.querySelector(".buy");
 
 if(buyBtn){
@@ -1633,7 +1634,10 @@ async function loginUser(){
     const phone = document.getElementById("phoneNumber").value.trim();
 const password = document.getElementById("userPassword").value.trim();
 
-    if(!phone || !password) return;
+    if(!phone || !password){
+    alert("Ampidiro numéro sy mot de passe");
+    return;
+}
 
     try{
 
@@ -1769,12 +1773,14 @@ Accuracy: ${gps.accuracy} mètres`;
 async function saveProduct(){
     
 
-const savedGPS = JSON.parse(localStorage.getItem("sellerGPS"));
+
     
     const product = {
         name: document.getElementById("productName").value,
         price: document.querySelector('input[placeholder="Vidiny (Ar)"]').value,
-        gps: JSON.parse(localStorage.getItem("sellerGPS")) || null,
+        gps: localStorage.getItem("sellerGPS")
+    ? JSON.parse(localStorage.getItem("sellerGPS"))
+    : null,
         quantity: document.querySelector('input[placeholder="Isany"]').value,
         deliveryTime: document.querySelector('input[placeholder="Alebehiny"]').value,
         category: document.querySelector('.category-select').value,
