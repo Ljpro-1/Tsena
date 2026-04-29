@@ -609,6 +609,7 @@ window.firebaseModules = {
 };
 
 </script>
+
 </head>
 
 <body>
@@ -1006,8 +1007,12 @@ window.firebaseModules = {
 
 <script>
 
-
+let isSearching = false;
 async function searchNearbyServices() {
+    if(isSearching){
+    return;
+}
+isSearching = true;
 
     const serviceType = document.getElementById("serviceType").value;
     const locationInput = document.getElementById("manualLocation").value.trim();
@@ -1063,34 +1068,38 @@ async function searchNearbyServices() {
 const locationChoice = document.getElementById("locationChoice").value;
 const manualLocation = document.getElementById("manualLocation").value.trim();
 
-let phoneLat, phoneLon;
 let searchLat, searchLon;
 
-/* Position réelle téléphone */
-if(!navigator.geolocation){
-    resultsBox.innerHTML = "❌ GPS tsy disponible.";
-    return;
+/* =========================
+   MODE GPS (akaiky ahy)
+========================= */
+if(locationChoice === "near"){
+
+    if(!navigator.geolocation){
+        resultsBox.innerHTML = "❌ GPS tsy disponible.";
+        return;
+    }
+
+    try {
+        const gps = await getAccuratePosition();
+        searchLat = gps.lat;
+        searchLon = gps.lon;
+
+    } catch (err) {
+        resultsBox.innerHTML = "❌ Tsy afaka maka GPS.";
+        return;
+    }
 }
 
+/* =========================
+   MODE MANUEL
+========================= */
+else if(locationChoice === "manual"){
 
-
-try {
-    const gps = await getAccuratePosition();
-    phoneLat = gps.lat;
-    phoneLon = gps.lon;
-} catch (err) {
-    resultsBox.innerHTML = `
-        ❌ Tsy afaka maka GPS<br>
-        ✔ Ampidiro toerana manual
-    `;
-    return;
-}
-/* Valeur par défaut */
-searchLat = phoneLat;
-searchLon = phoneLon;
-
-/* Recherche manuelle */
-if(locationChoice === "manual" && manualLocation){
+    if(!manualLocation){
+        resultsBox.innerHTML = "❌ Ampidiro toerana.";
+        return;
+    }
 
     const coords = await getCoordinates(manualLocation);
 
@@ -1265,8 +1274,8 @@ if(locationChoice === "manual" && manualLocation){
 
 
 ${selectedFilters.map(f => `
-${f}(around:10000,${searchLat},${searchLon});
-way${f.substring(4)}(around:15000,${searchLat},${searchLon});
+${f}(around:5000,${searchLat},${searchLon});
+way${f.substring(4)}(around:8000,${searchLat},${searchLon});
 relation${f.substring(4)}(around:15000,${searchLat},${searchLon});
 `).join("\n")}
         );
@@ -1290,9 +1299,9 @@ relation${f.substring(4)}(around:15000,${searchLat},${searchLon});
         [out:json][timeout:25];
         (
             ${selectedFilters.map(f => `
-${f}(around:30000,${phoneLat},${phoneLon});
-way${f.substring(4)}(around:80000,${phoneLat},${phoneLon});
-relation${f.substring(4)}(around:80000,${phoneLat},${phoneLon});
+${f}(around:15000,${phoneLat},${phoneLon});
+way${f.substring(4)}(around:30000,${phoneLat},${phoneLon});
+relation${f.substring(4)}(around:30000,${phoneLat},${phoneLon});
 `).join("\n")}
         );
         out body;
@@ -1343,21 +1352,35 @@ relation${f.substring(4)}(around:80000,${phoneLat},${phoneLon});
             return R * c;
         }
 
-        const sorted = data.elements
-.map(place => {
-        const lat = place.lat ?? place.center?.lat;
-        const lon = place.lon ?? place.center?.lon;
-        
-        if (!lat || !lon) return null;
-        
-        return {
-            ...place,
-            distance: calculateDistance(searchLat, searchLon, lat, lon)
-        };
-    })
-    .filter(p => p !== null)
-            .sort((a,b) => a.distance - b.distance);
+        const uniqueMap = new Map();
 
+data.elements.forEach(place => {
+
+    const lat = place.lat ?? place.center?.lat;
+    const lon = place.lon ?? place.center?.lon;
+
+    if(!lat || !lon) return;
+
+    const key = (place.tags?.name || "") + "_" + lat.toFixed(4) + "_" + lon.toFixed(4);
+
+    if(!uniqueMap.has(key)){
+        uniqueMap.set(key, place);
+    }
+});
+
+const cleaned = Array.from(uniqueMap.values());
+
+const sorted = cleaned
+.map(place => {
+    const lat = place.lat ?? place.center?.lat;
+    const lon = place.lon ?? place.center?.lon;
+
+    return {
+        ...place,
+        distance: calculateDistance(searchLat, searchLon, lat, lon)
+    };
+})
+.sort((a,b) => a.distance - b.distance);
         
         resultsBox.innerHTML = `
 📍 Recherche basée sur : ${locationChoice === "manual" ? manualLocation : "Votre position actuelle"}
@@ -1371,7 +1394,11 @@ sorted.slice(0, 15).forEach(place => {
 
     if(!lat || !lon) return;
 
-    const name = place.tags.name || "Tsy misy anarana";
+    const name =
+    place.tags.name ||
+    place.tags.shop ||
+    place.tags.amenity ||
+    "Toerana tsy fantatra";
 
     const phone =
         place.tags.phone ||
@@ -1437,6 +1464,7 @@ resultsBox.appendChild(card);
         `;
 
         console.error(error);
+        isSearching = false;
     }
 
 }
@@ -2198,41 +2226,52 @@ async function getAccuratePosition() {
             return;
         }
 
-        navigator.geolocation.getCurrentPosition(
-            pos => {
+        let attempts = 0;
+        let bestPosition = null;
 
-                const accuracy = pos.coords.accuracy;
+        function tryGetPosition() {
 
-                if (accuracy > 200) {
-                    console.warn("GPS faible précision:", accuracy);
-                }
+            navigator.geolocation.getCurrentPosition(
+                pos => {
 
-                resolve({
-                    lat: pos.coords.latitude,
-                    lon: pos.coords.longitude,
-                    accuracy: accuracy
-                });
+                    attempts++;
 
-            },
-            err => {
+                    const current = {
+                        lat: pos.coords.latitude,
+                        lon: pos.coords.longitude,
+                        accuracy: pos.coords.accuracy
+                    };
 
-                if (err.code === 1) {
-                    reject("Permission refusée GPS");
-                } else if (err.code === 2) {
-                    reject("Position indisponible");
-                } else if (err.code === 3) {
-                    reject("Timeout GPS");
-                } else {
+                    if (!bestPosition || current.accuracy < bestPosition.accuracy) {
+                        bestPosition = current;
+                    }
+
+                    // Si précision excellente ou 3 essais atteints
+                    if (current.accuracy <= 50 || attempts >= 3) {
+
+                        if (bestPosition.accuracy > 150) {
+                            reject("GPS tsy marina (faible précision)");
+                        } else {
+                            resolve(bestPosition);
+                        }
+
+                    } else {
+                        tryGetPosition();
+                    }
+
+                },
+                err => {
                     reject("Erreur GPS");
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 8000,
+                    maximumAge: 0
                 }
+            );
+        }
 
-            },
-            {
-                enableHighAccuracy: true,
-                timeout: 15000,
-                maximumAge: 0
-            }
-        );
+        tryGetPosition();
     });
 }
 </script>
