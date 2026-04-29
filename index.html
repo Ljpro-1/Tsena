@@ -1353,43 +1353,84 @@ distance: calculateDistance(
 
         resultsBox.innerHTML = "";
 
-        sorted.slice(0, 30).forEach(place => {
+sorted.slice(0, 15).forEach(place => {
 
-            const name = place.tags.name || "Tsy misy anarana";
-            const distance = place.distance.toFixed(2);
-            const isOpen = place.tags.opening_hours ? "🟢 Info disponible" : "⚪ Tsy fantatra";
+    const lat = place.lat || place.center?.lat;
+    const lon = place.lon || place.center?.lon;
 
-            resultsBox.innerHTML += `
-                <div style="
-                    background:white;
-                    padding:15px;
-                    margin:10px 0;
-                    border-radius:12px;
-                    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-                ">
-                    <h3>${name}</h3>
-                    <p>📍 Distance: ${distance} km</p>
-                    <p>${isOpen}</p>
-<p>📌 Latitude: ${place.lat || place.center?.lat}</p>
-<p>📌 Longitude: ${place.lon || place.center?.lon}</p>
+    if(!lat || !lon) return;
 
+    const name = place.tags.name || "Tsy misy anarana";
 
-<a href="https://www.google.com/maps/dir/?api=1&origin=${phoneLat},${phoneLon}&destination=${place.lat},${place.lon}"
-                  target="_blank"
-                       style="
-                            display:inline-block;
-                            background:#ff6600;
-                            color:white;
-                            padding:10px 15px;
-                            border-radius:8px;
-                            text-decoration:none;
-                            font-weight:bold;
-                       ">
-                       🗺️ Voir itinéraire
-                    </a>
-                </div>
-            `;
-        });
+    const phone =
+        place.tags.phone ||
+        place.tags["contact:phone"] ||
+        place.tags.mobile ||
+        "Tsy misy";
+
+    const opening =
+        place.tags.opening_hours ||
+        "Tsy fantatra";
+
+    const distance = place.distance.toFixed(2);
+
+    const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+
+    resultsBox.innerHTML += `
+    <div style="
+        background:white;
+        padding:15px;
+        margin:10px 0;
+        border-radius:12px;
+        box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    ">
+
+        <h3>📍 ${name}</h3>
+
+        <p><b>📞 Contact:</b> ${phone}</p>
+
+${
+phone !== "Tsy misy"
+? `
+<a href="tel:${phone.replace(/\s+/g,'')}"
+   style="
+        display:inline-block;
+        margin-top:8px;
+        background:#007bff;
+        color:white;
+        padding:10px 15px;
+        border-radius:8px;
+        text-decoration:none;
+        font-weight:bold;
+   ">
+   📞 Antsoy
+</a>
+`
+: ""
+}
+
+        <p><b>📏 Distance:</b> ${distance} km</p>
+
+        <p><b>🕒 Horaire:</b> ${opening}</p>
+
+        <a href="${mapLink}"
+           target="_blank"
+           style="
+                display:inline-block;
+                margin-top:10px;
+                background:#28a745;
+                color:white;
+                padding:10px 15px;
+                border-radius:8px;
+                text-decoration:none;
+                font-weight:bold;
+           ">
+           🗺️ Hijery Google Map
+        </a>
+
+    </div>
+    `;
+});
 
     } catch(error) {
 
@@ -1700,30 +1741,38 @@ function getSellerGPS() {
     
     const status = document.getElementById("gpsStatus");
     const coordsText = document.getElementById("gpsCoords");
-    
+
     if (!navigator.geolocation) {
         status.innerText = "GPS tsy supported.";
         return;
     }
-    
-    status.innerText = "Mitady toerana...";
-    
+
+    status.innerText = "Mitady toerana marina...";
+
     navigator.geolocation.getCurrentPosition(
         position => {
             const gps = {
                 lat: position.coords.latitude,
-                lng: position.coords.longitude
+                lng: position.coords.longitude,
+                accuracy: position.coords.accuracy
             };
 
             localStorage.setItem("sellerGPS", JSON.stringify(gps));
 
-            status.innerText = "Toerana voaray tsara ✔";
+            status.innerText = "✔ Toerana marina azo";
 
-            // 🔥 AFFICHAGE COORDONNÉES
-            coordsText.innerText = `Latitude: ${gps.lat} | Longitude: ${gps.lng}`;
+            coordsText.innerText =
+                `Latitude: ${gps.lat}
+Longitude: ${gps.lng}
+Accuracy: ${gps.accuracy} mètres`;
         },
-        () => {
-            status.innerText = "Tsy afaka nahazo localisation.";
+        error => {
+            status.innerText = "❌ Tsy nahazo GPS: " + error.message;
+        },
+        {
+            enableHighAccuracy: true, // 🔥 IMPORTANT
+            timeout: 10000,
+            maximumAge: 0
         }
     );
 }
