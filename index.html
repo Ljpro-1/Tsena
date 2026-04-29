@@ -47,7 +47,7 @@ body{
 .enter-btn{
     padding:15px 50px;
     border:none;
-    background:#ff6600;
+    background:violet;
     color:white;
     font-size:18px;
     border-radius:30px;
@@ -56,7 +56,7 @@ body{
 }
 
 .enter-btn:hover{
-    background:#e65c00;
+    background:orange;
 }
 
 /* PAGE 2 */
@@ -89,7 +89,7 @@ h3{
 /* DEMO BOX */
 .demo-box{
     height:100px;
-    background:linear-gradient(45deg,#ff6600,#ff9900);
+    background:linear-gradient(45deg,beige,#ff9900);
     border-radius:10px;
     margin:15px 0;
 }
@@ -856,6 +856,8 @@ window.firebaseModules = {
 </button>
 
     <p id="gpsStatus"></p>
+
+<p id="gpsCoords" style="font-size:13px;color:#333;margin-top:5px;"></p>
 </div>
 
         <input type="text" placeholder="Facebook">
@@ -1697,6 +1699,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function getSellerGPS() {
     
     const status = document.getElementById("gpsStatus");
+    const coordsText = document.getElementById("gpsCoords");
     
     if (!navigator.geolocation) {
         status.innerText = "GPS tsy supported.";
@@ -1708,12 +1711,16 @@ function getSellerGPS() {
     navigator.geolocation.getCurrentPosition(
         position => {
             const gps = {
-    lat: position.coords.latitude,
-    lng: position.coords.longitude
-};
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
 
-localStorage.setItem("sellerGPS", JSON.stringify(gps));
+            localStorage.setItem("sellerGPS", JSON.stringify(gps));
+
             status.innerText = "Toerana voaray tsara ✔";
+
+            // 🔥 AFFICHAGE COORDONNÉES
+            coordsText.innerText = `Latitude: ${gps.lat} | Longitude: ${gps.lng}`;
         },
         () => {
             status.innerText = "Tsy afaka nahazo localisation.";
@@ -1728,6 +1735,7 @@ const savedGPS = JSON.parse(localStorage.getItem("sellerGPS"));
     const product = {
         name: document.getElementById("productName").value,
         price: document.querySelector('input[placeholder="Vidiny (Ar)"]').value,
+        gps: JSON.parse(localStorage.getItem("sellerGPS")) || null,
         quantity: document.querySelector('input[placeholder="Isany"]').value,
         deliveryTime: document.querySelector('input[placeholder="Alebehiny"]').value,
         category: document.querySelector('.category-select').value,
@@ -2008,31 +2016,29 @@ ${p.image ? `
 <div><b>Anaran'ny toerana:</b> ${p.shopLocationName || ""}</div>
 
 ${p.gps ? `
-<a href="https://www.google.com/maps/dir/?api=1&destination=${p.gps.lat},${p.gps.lng}"
+<div style="margin-top:10px;">
+    <b>📍 Coordonnées:</b><br>
+    Latitude: ${p.gps.lat} <br>
+    Longitude: ${p.gps.lng}
+</div>
+
+<a href="https://www.google.com/maps?q=${p.gps.lat},${p.gps.lng}"
 target="_blank"
 style="
 display:block;
 margin-top:10px;
-padding:10px;
-background:orange;
+padding:12px;
+background:#28a745;
 color:white;
 text-align:center;
 border-radius:10px;
 text-decoration:none;
 font-weight:bold;
 ">
-📍 Hijery map sy itinéraire
+🗺️ Ouvrir dans Google Maps
 </a>
-
-<iframe
-width="100%"
-height="250"
-style="border:0;margin-top:10px;border-radius:12px;"
-loading="lazy"
-allowfullscreen
-src="https://www.google.com/maps?q=${p.gps.lat},${p.gps.lng}&output=embed">
-</iframe>
 ` : ""}
+
         <div><b>Description:</b> ${p.description || ""}</div>
     </div>
 
