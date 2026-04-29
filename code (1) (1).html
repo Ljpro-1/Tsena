@@ -1,0 +1,2259 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tsenabe Mada</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background:#f5f5f5;
+}
+
+/* PAGE 1 */
+#page1{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:#000;
+    z-index:10;
+}
+
+/* IMAGE */
+.main-image{
+    width:90%;
+    max-width:400px;
+    height:auto;
+    border-radius:15px;
+    object-fit:cover;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* BUTTON */
+.enter-btn{
+    padding:15px 50px;
+    border:none;
+    background:#ff6600;
+    color:white;
+    font-size:18px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.enter-btn:hover{
+    background:#e65c00;
+}
+
+/* PAGE 2 */
+#page2{
+    display:none;
+    min-height:100vh;
+    padding:20px;
+}
+
+/* CONTAINER */
+.container{
+    max-width:400px;
+    margin:40px auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* TITLES */
+h2{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+h3{
+    margin-top:15px;
+}
+
+/* DEMO BOX */
+.demo-box{
+    height:100px;
+    background:linear-gradient(45deg,#ff6600,#ff9900);
+    border-radius:10px;
+    margin:15px 0;
+}
+
+/* INPUT */
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:14px;
+}
+
+/* BUTTON LOGIN */
+.login-btn{
+    width:100%;
+    padding:12px;
+    background:#ff6600;
+    color:white;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    background:#e65c00;
+}
+
+/* LINKS */
+.link{
+    text-align:center;
+    margin-top:10px;
+    color:#666;
+    font-size:14px;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    margin-top:15px;
+    font-size:13px;
+}
+
+/* RESPONSIVE FIX */
+@media (max-width:400px){
+    .container{
+        margin:20px;
+        padding:20px;
+    }
+}
+/* PAGE 3 */
+
+#page3{
+    display:none;
+    min-height:100vh;
+    background:#f8f9fa;
+    padding-bottom:30px;
+}
+
+/* HEADER */
+.header{
+    background:#ff6600;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.header h1{
+    margin-bottom:5px;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:25px 15px;
+}
+
+.hero h2{
+    margin-bottom:10px;
+}
+
+/* CARDS */
+.cards{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    padding:0 15px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+/* ACTIONS */
+.actions{
+    padding:20px;
+}
+
+.btn{
+    width:100%;
+    padding:15px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    color:white;
+    cursor:pointer;
+}
+
+.sell{
+    background:#28a745;
+}
+
+.buy{
+    background:#007bff;
+}
+
+.btn:hover{
+    opacity:0.9;
+}
+/* PAGE 4 */
+/* FOND GENERAL */
+#page4{
+    display:none;
+    min-height:100vh;
+    background:linear-gradient(180deg,#fff7cc,#ffe066);
+    padding:20px;
+}
+
+/* CONTAINER */
+.sell-container{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* TITRE */
+.sell-container h2{
+    text-align:center;
+    color:#ff6600;
+    font-weight:bold;
+}
+
+/* INPUT STYLE */
+input, select, textarea{
+    width:100%;
+    padding:13px;
+    margin:7px 0;
+    border-radius:12px;
+    border:2px solid #ffe066;
+    background:#fffdf5;
+    font-size:14px;
+}
+
+/* SELECT SPECIAL */
+.category-select{
+    background:#fff3b0;
+    font-weight:bold;
+}
+
+/* TEXTAREA */
+.textarea{
+    min-height:100px;
+}
+
+/* UPLOAD BOX */
+.upload-box{
+    display:block;
+    padding:18px;
+    margin-top:10px;
+    border:2px dashed #ffcc00;
+    text-align:center;
+    border-radius:12px;
+    cursor:pointer;
+    background:#fff8dc;
+    font-weight:bold;
+}
+
+/* IMAGE */
+.preview{
+    width:100%;
+    margin-top:10px;
+    border-radius:12px;
+}
+
+/* BUTTON */
+.publish-btn{
+    width:100%;
+    padding:16px;
+    margin-top:20px;
+    background:linear-gradient(45deg,#ff6600,#ff9900);
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* HOVER */
+.publish-btn:hover{
+    opacity:0.9;
+}
+/* CONTAINER IMAGE */
+.image-preview-container{
+    position:relative;
+    margin-top:10px;
+    display:none;
+}
+
+/* IMAGE */
+.preview{
+    width:100%;
+    border-radius:12px;
+}
+
+/* DELETE BUTTON */
+.remove-btn{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:red;
+    color:white;
+    border:none;
+    border-radius:50%;
+    width:30px;
+    height:30px;
+    font-size:16px;
+    cursor:pointer;
+}
+#toeranaBox input {
+  margin-top: 10px;
+  border: 2px solid #ffcc00;
+}
+.product-card {
+  background: white;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.product-card hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+/* PAGE 5 FULL MARKETPLACE */
+#page5{
+    display:none;
+    min-height:100vh;
+    background:#f3f4f6;
+    padding:0;
+}
+
+
+
+
+
+
+.market-header{
+    background:white;
+    color:#111;
+    padding:18px 20px;
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    border-bottom:2px solid #eee;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+#productList{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:25px;
+    padding:25px;
+}
+
+.product-card{
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,0.12);
+    transition:0.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-10px);
+}
+
+.product-card img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    background:#f2f2f2;
+}
+
+.product-content{
+    padding:25px;
+}
+
+.product-title{
+    font-size:30px;
+    font-weight:bold;
+    color:#111;
+    margin-bottom:12px;
+}
+
+.product-price{
+    font-size:36px;
+    color:#ff8800;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:20px;
+}
+
+.product-info{
+    font-size:18px;
+    color:#333;
+    background:#fff8dc;
+    padding:10px;
+    border-radius:12px;
+}
+
+.section-divider{
+    margin:20px 0;
+    border:none;
+    border-top:2px solid #ffe066;
+}
+
+.seller-box{
+    background:#fffdf0;
+    padding:18px;
+    border-radius:18px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+@media(max-width:768px){
+    #productList{
+        grid-template-columns:1fr;
+        padding:15px;
+    }
+
+    .product-grid,
+    .seller-box{
+        grid-template-columns:1fr;
+    }
+
+    .product-title{
+        font-size:24px;
+    }
+
+    .product-price{
+        font-size:30px;
+    }
+}
+
+
+
+/* AJOUTER POUR CORRIGER LE BOUTON RETOUR */
+
+
+
+
+
+.back-btn {
+    position: fixed;
+    top: 5px;
+    left: 10px;
+    z-index: 99999;
+
+    background: rgba(0, 0, 0, 0.5); /* 👈 transparence */
+    backdrop-filter: blur(0,5px); /* 👈 effet flou moderne */
+
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.back-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.merged-box{
+    background:linear-gradient(45deg,#ff6600,#ff9900);
+    color:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    margin:20px 0;
+    font-size:20px;
+    font-weight:bold;
+    line-height:1.6;
+}
+.login-box{
+    margin-top:12px;
+    padding:14px;
+    text-align:center;
+    border:2px solid #ffe066;
+    border-radius:12px;
+    background:#fffdf5;
+    color:#555;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-box:hover{
+    background:#fff3b0;
+}
+
+.secondary-login-btn{
+    width:100%;
+    padding:14px;
+    margin-top:12px;
+    background:white;
+    color:#ff6600;
+    border:2px solid #ff6600;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.secondary-login-btn:hover{
+    background:#ff6600;
+    color:white;
+}
+</style>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+    getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+sendPasswordResetEmail,
+onAuthStateChanged,
+setPersistence,
+browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    getDoc,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDiRVi0vBb4kzfMOrp5Rdrwxias_92l9ls",
+    authDomain: "tsena-527ac.firebaseapp.com",
+    projectId: "tsena-527ac",
+    storageBucket: "tsena-527ac.appspot.com",
+    messagingSenderId: "719498456209",
+    appId: "1:719498456209:web:41b73b0297236469f7a330",
+};
+
+const app = initializeApp(firebaseConfig);
+
+window.auth = getAuth(app);
+setPersistence(auth, browserLocalPersistence);
+window.db = getFirestore(app);
+
+
+
+
+window.firebaseModules = {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged,
+    doc,
+    setDoc,
+    getDoc,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+};
+
+</script>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1">
+
+    <!-- CHANGE IMAGE HERE -->
+    <img src="image3.jpg" class="main-image">
+
+    <button class="enter-btn" onclick="goPage2()">Hiditra</button>
+
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2">
+    <div class="container">
+
+        <h2>Tongasoa eto amin'ny TsenaBeMada👋</h2>
+
+<div class="merged-box">
+    <p>Mividy sy mivarotra, aingana, tsotra, azo antoka</p>
+    <p>Fijerena toerana sy asa service faran'izay aingana</p>
+</div>
+
+<h3>Créer un compte</h3>
+
+        <input type="text" id="loginName" placeholder="Anarana feno">
+        <input type="text" id="phoneNumber" placeholder="Numéro téléphone">
+        <input type="password" id="userPassword" placeholder="Mot de passe">
+<div class="login-box" onclick="recoverPassword()">
+    🔑 Adino ny mot de passe ?
+</div>
+
+<button class="login-btn" onclick="registerUser()">
+    Hamorona compte
+</button>
+
+<button class="secondary-login-btn" onclick="loginUser()">
+    Efa manana compte? Se connecter
+</button>
+        <div class="footer">
+            Tsenabe Mada © 2026
+        </div>
+
+    </div>
+</div>
+
+<!-- PAGE 3 -->
+<!-- PAGE 3 PRO -->
+<div id="page3">
+    <!-- PAGE 3 : AJOUTER juste après <div id="page3"> -->
+<button onclick="goBack(2)" class="back-btn">⬅ Retour</button>
+
+
+
+
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Tsenabe Mada</h1>
+        <p>Mividy sy mivarotra mora eto Madagasikara</p>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h2>Tsena an-tserasera ho an'ny rehetra 🇲🇬</h2>
+        <p>
+            Ividy vokatra, ivarotra vokatra, ary mifandray amin'ny olona manerana ny Nosy.
+        </p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+
+        <div class="card">
+            <h3>⚡ Haingana</h3>
+            <p> vita ao anatin'ny fotoana fohy</p>
+        </div>
+
+        <div class="card">
+            <h3>🔒 Azo antoka</h3>
+            <p>Fifandraisana mivantana sy azo itokisana</p>
+        </div>
+
+        <div class="card">
+            <h3>📱 Mora ampiasaina</h3>
+            <p>azo ampiasaina amin'ny finday rehetra</p>
+        </div>
+
+    </div>
+
+    <!-- ACTION -->
+    <div class="actions">
+<button class="btn sell" onclick="goPage4()">HIVAROTRA</button>
+        <button class="btn buy" onclick="document.getElementById('page3').style.display='none';document.getElementById('page5').style.display='block';loadProducts();">HIVIDY</button>
+   <button class="btn"
+        onclick="document.getElementById('page3').style.display='none';
+                 document.getElementById('servicePage').style.display='block';"
+        style="background:#ff4fa3;color:white;">
+    HIJERY TOERANA SY SERVICE
+</button>
+    </div>
+    
+
+</div>
+
+<!-- PAGE 4 : HIVAROTRA PRO -->
+<div id="page4">
+    <!-- PAGE 4 : AJOUTER juste après <div id="page4"> -->
+<button onclick="goBack(3)" class="back-btn">⬅ Retour</button>
+
+    <div class="sell-container">
+
+        <h2>Hivarotra entana</h2>
+
+        <!-- PRODUIT -->
+        <h3>📦 Mombamomba ny vokatra</h3>
+
+        <input type="text" id="productName" placeholder="Anaran'ny vokatra">
+
+        <input type="number" placeholder="Vidiny (Ar)">
+
+        <input type="text" placeholder="Alebehiny">
+
+        <input type="number" placeholder="Isany">
+
+        <!-- CATEGORIE -->
+<select class="category-select">
+    <option value="">Karazany (safidio)</option>
+
+    <optgroup label="🍽️ Sakafo">
+        <option>Sakafo masaka</option>
+        <option>Fast food</option>
+        <option>Zava-pisotro</option>
+        <option>Mofo & pâtisserie</option>
+        <option>Voankazo</option>
+        <option>Legioma</option>
+    </optgroup>
+
+    <optgroup label="👕 Akanjo & lamaody">
+        <option>Akanjo lehilahy</option>
+        <option>Akanjo vehivavy</option>
+        <option>Akanjo ankizy</option>
+        <option>Kiraro</option>
+        <option>Accessoires</option>
+    </optgroup>
+
+    <optgroup label="📱 Électronique">
+        <option>Finday</option>
+        <option>Accessoires téléphone</option>
+        <option>Ordinateur</option>
+        <option>TV</option>
+    </optgroup>
+
+    <optgroup label="🏠 Trano & fanaka">
+        <option>Fanaka</option>
+        <option>Haingo trano</option>
+        <option>Fitaovana an-dakozia</option>
+    </optgroup>
+
+    <optgroup label="🚗 Fitaterana">
+        <option>Fiara</option>
+        <option>Moto</option>
+        <option>Bisikileta</option>
+    </optgroup>
+
+    <optgroup label="💄 Kosmetika">
+        <option>Fikarakarana vatana</option>
+        <option>Parfum</option>
+    </optgroup>
+
+    <optgroup label="🔧 Asa & service">
+        <option>Fanamboarana</option>
+        <option>Service</option>
+    </optgroup>
+
+    <option>Hafa</option>
+</select>
+
+        <input type="text" placeholder="Akora fototra">
+
+        <textarea placeholder="Mombamomba azy" class="textarea"></textarea>
+
+        <!-- IMAGE -->
+      
+<!-- TYPE DE VENTE -->
+<h3>💰 Karazana varotra</h3>
+
+<select id="typeVente">
+  <option value="">Safidio</option>
+  <option value="miady">Miady varotra (négociable)</option>
+  <option value="tsy">Tsy miady varotra (prix fixe)</option>
+</select>
+
+<!-- LIVRAISON -->
+<h3>🚚 Fomba fanaterana</h3>
+
+<select id="livraison">
+  <option value="">Safidio</option>
+  <option value="livraison">Livraison</option>
+  <option value="boutique">anantona boutique</option>
+</select>
+
+<!-- TOERANA (caché au début) -->
+<div id="toeranaBox" style="display:none;">
+  <input type="text" placeholder="Toerana (Adresse boutique)">
+</div>
+        <!-- VENDEUR -->
+        <h3>👤 Mombamomba ny mpivarotra</h3>
+
+        <input type="text" placeholder="Anaran'ny mpivarotra">
+
+        <input type="text" placeholder="Numéro téléphone">
+        <label>Fomba fanaterana :</label>
+
+<select id="deliveryMethod" class="category-select">
+    <option value="">Safidio</option>
+    <option value="Livraison">Livraison</option>
+    <option value="Boutique">Anantona boutique</option>
+</select>
+
+<div id="gpsBox" style="margin-top:10px;">
+    <input type="text" id="shopLocationName" placeholder="Anaran'ny toerana">
+
+    <p style="font-size:13px;color:#555;">
+        Raha ampiditra GPS ianao dia mora ho an'ny mpanjifa ny mijery ny toerana misy anao, midira na manatona an'ilay toerana hivarotanao ary tsindrio ny bouton: "Ampiditra GPS", activeo ny localisation ao amin'ny paramètre.
+    </p>
+
+<button type="button"
+        onclick="getSellerGPS()"
+        style="
+            display:block;
+            width:100%;
+            padding:15px;
+            margin-top:12px;
+            background:#ff5722;
+            color:#fff;
+            border:none;
+            border-radius:12px;
+            font-size:17px;
+            font-weight:bold;
+            text-align:center;
+            cursor:pointer;
+        ">
+    📍 Ampiditra GPS
+</button>
+
+    <p id="gpsStatus"></p>
+</div>
+
+        <input type="text" placeholder="Facebook">
+
+        <input type="email" placeholder="Email">
+
+        <input type="text" placeholder="WhatsApp">
+
+        <input type="text" placeholder="Fonenana">
+<h3>📍 Faritra / Ville</h3>
+
+<select id="faritraSelect" class="category-select">
+    <option value="">Safidio ny faritra na ville</option>
+
+    <optgroup label="A">
+        <option>Ambalavao</option>
+        <option>Ambanja</option>
+        <option>Ambatofinandrahana</option>
+        <option>Ambatolampy</option>
+        <option>Ambatondrazaka</option>
+        <option>Ambilobe</option>
+        <option>Ambositra</option>
+        <option>Ambovombe</option>
+        <option>Ambohidratrimo</option>
+        <option>Ambohimahasoa</option>
+        <option>Ampanihy</option>
+        <option>Amparafaravola</option>
+        <option>Andapa</option>
+        <option>Andilamena</option>
+        <option>Andramasina</option>
+        <option>Anjozorobe</option>
+        <option>Ankazobe</option>
+        <option>Antalaha</option>
+        <option>Antananarivo</option>
+        <option>Antanifotsy</option>
+        <option>Antsirabe</option>
+        <option>Antsiranana</option>
+        <option>Antsohihy</option>
+        <option>Arivonimamo</option>
+    </optgroup>
+
+    <optgroup label="B">
+        <option>Bekily</option>
+        <option>Belo sur Tsiribihina</option>
+        <option>Betafo</option>
+        <option>Brickaville</option>
+    </optgroup>
+
+    <optgroup label="F">
+        <option>Farafangana</option>
+        <option>Faratsiho</option>
+        <option>Fenerive Est</option>
+        <option>Fenoarivobe</option>
+        <option>Fianarantsoa</option>
+        <option>Fort-Dauphin (Tolagnaro)</option>
+    </optgroup>
+
+    <optgroup label="I">
+        <option>Ifanadiana</option>
+        <option>Ihosy</option>
+        <option>Ikalamavony</option>
+        <option>Ikongo</option>
+        <option>Ivohibe</option>
+    </optgroup>
+
+    <optgroup label="M">
+        <option>Maevatanana</option>
+        <option>Mahajanga</option>
+        <option>Mahanoro</option>
+        <option>Maintirano</option>
+        <option>Manakara</option>
+        <option>Mananjary</option>
+        <option>Mandoto</option>
+        <option>Manjakandriana</option>
+        <option>Maroantsetra</option>
+        <option>Miandrivazo</option>
+        <option>Miarinarivo</option>
+        <option>Moramanga</option>
+        <option>Morombe</option>
+        <option>Morondava</option>
+        <option>Moramanga</option>
+        <option>Mitsinjo</option>
+    </optgroup>
+
+    <optgroup label="N">
+        <option>Nosy Be</option>
+    </optgroup>
+
+    <optgroup label="S">
+        <option>Sakaraha</option>
+        <option>Sambava</option>
+        <option>Soalala</option>
+        <option>Soanierana Ivongo</option>
+        <option>Taolagnaro</option>
+        <option>Toamasina</option>
+        <option>Toliara</option>
+        <option>Tsiroanomandidy</option>
+    </optgroup>
+
+    <optgroup label="V">
+        <option>Vangaindrano</option>
+        <option>Vatomandry</option>
+        <option>Vavatenina</option>
+        <option>Vohemar</option>
+    </optgroup>
+
+    <optgroup label="Hafa">
+        <option>Autre</option>
+    </optgroup>
+</select>
+<button class="publish-btn" onclick="saveProduct()">🚀 Alefa</button>
+
+    </div>
+</div>
+<!-- PAGE 5 : HIVIDY -->
+
+<!-- PAGE 5 : HIVIDY PRO -->
+<div id="page5">
+    <!-- PAGE 5 : AJOUTER juste après <div id="page5"> -->
+<button onclick="goBack(3)" class="back-btn">⬅ Retour</button>
+    
+
+    <div class="market-header">
+        🛍️ TsenaBe Mada Marketplace
+    </div>
+
+    <!-- SEARCH + FILTER -->
+    <div style="padding:20px;background:white;box-shadow:0 4px 15px rgba(0,0,0,0.08);display:flex;flex-wrap:wrap;gap:15px;justify-content:center;">
+
+        <input type="text" id="searchInput" placeholder="🔍 Rechercher produit..."
+            style="padding:14px;width:300px;border-radius:12px;border:2px solid #ffe066;">
+
+        <select id="filterCategory" style="padding:14px;border-radius:12px;border:2px solid #ffe066;">
+            <option value="">Karazany rehetra</option>
+        </select>
+
+        <select id="filterFaritra" style="padding:14px;border-radius:12px;border:2px solid #ffe066;">
+            <option value="">Faritra rehetra</option>
+        </select>
+
+    </div>
+
+    <div id="productList"></div>
+
+</div>
+
+<script>
+
+
+async function searchNearbyServices() {
+
+    const serviceType = document.getElementById("serviceType").value;
+    const locationInput = document.getElementById("manualLocation").value.trim();
+    const resultsBox = document.getElementById("serviceResults");
+
+    resultsBox.innerHTML = "🔍 Mitady...";
+
+    try {
+
+        
+
+        async function getCoordinates(placeName) {
+
+            const sources = [
+
+    `https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${encodeURIComponent(placeName + ", Madagascar")}`,
+    `https://photon.komoot.io/api/?q=${encodeURIComponent(placeName + ", Madagascar")}&limit=5`,
+    `https://geocode.maps.co/search?q=${encodeURIComponent(placeName + ", Madagascar")}`,
+    `https://nominatim.openstreetmap.org/search?format=json&limit=5&q=${encodeURIComponent(placeName)}`,
+    `https://photon.komoot.io/api/?q=${encodeURIComponent(placeName)}&limit=5`
+
+];
+            for(const url of sources){
+
+                try {
+
+                    const res = await fetch(url);
+                    const data = await res.json();
+
+                    if(url.includes("photon") && data.features?.length){
+                        return {
+                            lat: data.features[0].geometry.coordinates[1],
+                            lon: data.features[0].geometry.coordinates[0]
+                        };
+                    }
+
+                    if(Array.isArray(data) && data.length){
+                        return {
+                            lat: data[0].lat,
+                            lon: data[0].lon
+                        };
+                    }
+
+                } catch(e){}
+
+            }
+
+            return null;
+        }
+
+
+
+const locationChoice = document.getElementById("locationChoice").value;
+const manualLocation = document.getElementById("manualLocation").value.trim();
+
+let phoneLat, phoneLon;
+let searchLat, searchLon;
+
+/* Position réelle téléphone */
+if(!navigator.geolocation){
+    resultsBox.innerHTML = "❌ GPS tsy disponible.";
+    return;
+}
+
+const userPosition = await new Promise((resolve, reject) =>
+    navigator.geolocation.getCurrentPosition(resolve, reject)
+);
+
+phoneLat = userPosition.coords.latitude;
+phoneLon = userPosition.coords.longitude;
+
+/* Valeur par défaut */
+searchLat = phoneLat;
+searchLon = phoneLon;
+
+/* Recherche manuelle */
+if(locationChoice === "manual" && manualLocation){
+
+    const coords = await getCoordinates(manualLocation);
+
+    if(!coords){
+        resultsBox.innerHTML = "❌ Toerana tsy hita.";
+        return;
+    }
+
+    searchLat = parseFloat(coords.lat);
+    searchLon = parseFloat(coords.lon);
+}
+        let filters = {
+
+            atm: [
+    'node["amenity"="atm"]',
+    'way["amenity"="atm"]',
+    'relation["amenity"="atm"]',
+    'node["amenity"="bank"]',
+    'way["amenity"="bank"]',
+    'relation["amenity"="bank"]'
+],
+
+            bank: [
+                'node["amenity"="bank"]'
+            ],
+
+            barber: [
+                'node["shop"="barber"]'
+            ],
+
+            cash_point: [
+                'node["amenity"="atm"]'
+            ],
+
+            clinic: [
+                'node["amenity"="clinic"]'
+            ],
+
+            hairdresser: [
+                'node["shop"="hairdresser"]'
+            ],
+
+            dentist: [
+                'node["amenity"="dentist"]'
+            ],
+
+            road_assistance: [
+                'node["shop"="car_repair"]'
+            ],
+
+            doctor: [
+                'node["amenity"="doctors"]'
+            ],
+
+            church: [
+                'node["amenity"="place_of_worship"]'
+            ],
+
+            garage: [
+                'node["shop"="car_repair"]'
+            ],
+
+            bodyshop: [
+                'node["shop"="car_repair"]'
+            ],
+
+            bus_station: [
+                'node["amenity"="bus_station"]'
+            ],
+
+            hospital: [
+                'node["amenity"="hospital"]'
+            ],
+
+            hotel: [
+                'node["tourism"="hotel"]',
+                'node["tourism"="guest_house"]'
+            ],
+
+            budget_hotel: [
+                'node["tourism"="guest_house"]'
+            ],
+
+            tourism: [
+                'node["tourism"]'
+            ],
+
+            car_rental: [
+                'node["amenity"="car_rental"]'
+            ],
+
+            lycee: [
+                'node["amenity"="school"]'
+            ],
+
+            mechanic: [
+                'node["shop"="car_repair"]'
+            ],
+
+            pharmacy: [
+                'node["amenity"="pharmacy"]'
+            ],
+
+            fire_station: [
+                'node["amenity"="fire_station"]'
+            ],
+
+            police: [
+                'node["amenity"="police"]'
+            ],
+
+            quincaillerie: [
+                'node["shop"="hardware"]'
+            ],
+
+            phone_repair: [
+                'node["shop"="mobile_phone"]'
+            ],
+
+            restaurant: [
+                'node["amenity"="restaurant"]',
+                'node["amenity"="fast_food"]'
+            ],
+
+            gym: [
+                'node["leisure"="fitness_centre"]'
+            ],
+
+            fuel: [
+                'node["amenity"="fuel"]'
+            ],
+
+            supermarket: [
+                'node["shop"="supermarket"]'
+            ],
+
+            house_rental: [
+                'node["office"="estate_agent"]'
+            ],
+
+            university: [
+                'node["amenity"="university"]'
+            ],
+
+            veterinary: [
+                'node["amenity"="veterinary"]'
+            ],
+
+            vulcanisation: [
+                'node["shop"="tyres"]'
+            ],
+
+            wc: [
+                'node["amenity"="toilets"]'
+            ],
+
+            other: [
+                'node["name"]'
+            ]
+
+        };
+
+        const selectedFilters = filters[serviceType] || [
+    'node["name"]',
+    'way["name"]',
+    'relation["name"]'
+];
+
+        const overpassQuery = `
+        [out:json][timeout:25];
+        (
+
+
+${selectedFilters.map(f => `
+${f}(around:50000,${searchLat},${searchLon});
+way${f.substring(4)}(around:15000,${searchLat},${searchLon});
+relation${f.substring(4)}(around:15000,${searchLat},${searchLon});
+`).join("\n")}
+        );
+        out body;
+        `;
+
+        const response = await fetch("https://overpass-api.de/api/interpreter", {
+            method: "POST",
+            body: overpassQuery
+        });
+
+        const data = await response.json();
+        console.log("Résultats Overpass:", data);
+
+        if(!data.elements || !data.elements.length){
+
+    /* Si recherche manuelle échoue, essayer recherche élargie */
+    if(locationChoice === "manual"){
+
+        const fallbackQuery = `
+        [out:json][timeout:25];
+        (
+            ${selectedFilters.map(f => `
+${f}(around:200000,${phoneLat},${phoneLon});
+way${f.substring(4)}(around:80000,${phoneLat},${phoneLon});
+relation${f.substring(4)}(around:80000,${phoneLat},${phoneLon});
+`).join("\n")}
+        );
+        out body;
+        `;
+
+        const fallbackResponse = await fetch("https://overpass-api.de/api/interpreter", {
+            method: "POST",
+            body: fallbackQuery
+        });
+
+        const fallbackData = await fallbackResponse.json();
+
+        if(fallbackData.elements && fallbackData.elements.length){
+            data.elements = fallbackData.elements;
+        } else {
+            resultsBox.innerHTML = `
+                ❌ Tsy misy valiny ao amin'io toerana io.<br>
+                Andramo toerana hafa na service hafa.
+            `;
+            return;
+        }
+
+    } else {
+
+        resultsBox.innerHTML = `
+            ❌ Tsy misy service hita akaiky anao.<br>
+            Hamarino GPS na internet.
+        `;
+        return;
+    }
+}
+
+        function calculateDistance(lat1, lon1, lat2, lon2){
+
+            const R = 6371;
+            const dLat = (lat2-lat1) * Math.PI/180;
+            const dLon = (lon2-lon1) * Math.PI/180;
+
+            const a =
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI/180) *
+                Math.cos(lat2 * Math.PI/180) *
+                Math.sin(dLon/2) *
+                Math.sin(dLon/2);
+
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+            return R * c;
+        }
+
+        const sorted = data.elements
+            .map(place => ({
+                ...place,
+
+
+distance: calculateDistance(
+    phoneLat,
+    phoneLon,
+    place.lat || place.center?.lat,
+    place.lon || place.center?.lon
+)
+            }))
+            .sort((a,b) => a.distance - b.distance);
+
+        resultsBox.innerHTML = "";
+
+        sorted.slice(0, 30).forEach(place => {
+
+            const name = place.tags.name || "Tsy misy anarana";
+            const distance = place.distance.toFixed(2);
+            const isOpen = place.tags.opening_hours ? "🟢 Info disponible" : "⚪ Tsy fantatra";
+
+            resultsBox.innerHTML += `
+                <div style="
+                    background:white;
+                    padding:15px;
+                    margin:10px 0;
+                    border-radius:12px;
+                    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+                ">
+                    <h3>${name}</h3>
+                    <p>📍 Distance: ${distance} km</p>
+                    <p>${isOpen}</p>
+<p>📌 Latitude: ${place.lat || place.center?.lat}</p>
+<p>📌 Longitude: ${place.lon || place.center?.lon}</p>
+
+
+<a href="https://www.google.com/maps/dir/?api=1&origin=${phoneLat},${phoneLon}&destination=${place.lat},${place.lon}"
+                  target="_blank"
+                       style="
+                            display:inline-block;
+                            background:#ff6600;
+                            color:white;
+                            padding:10px 15px;
+                            border-radius:8px;
+                            text-decoration:none;
+                            font-weight:bold;
+                       ">
+                       🗺️ Voir itinéraire
+                    </a>
+                </div>
+            `;
+        });
+
+    } catch(error) {
+
+        resultsBox.innerHTML = `
+            ❌ Nisy olana tamin'ny fikarohana.<br>
+            Vérifie GPS, internet, ou lieu.
+        `;
+
+        console.error(error);
+    }
+
+}
+
+function logout() {
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("currentPhone");
+
+    document.getElementById("page1").style.display = "block";
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page3").style.display = "none";
+    document.getElementById("page4").style.display = "none";
+    document.getElementById("page5").style.display = "none";
+    document.getElementById("servicePage").style.display = "none";
+}
+document.addEventListener("DOMContentLoaded", function(){
+    const savedUser = localStorage.getItem("currentUser");
+const savedPhone = localStorage.getItem("currentPhone");
+
+if(savedUser && savedPhone){
+
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page3").style.display = "block";
+    document.getElementById("page4").style.display = "none";
+    document.getElementById("page5").style.display = "none";
+
+    const welcomeUser = document.getElementById("welcomeUser");
+    if(welcomeUser){
+        welcomeUser.innerText = "Tongasoa " + savedUser;
+        const livraison = document.getElementById("livraison");
+const toeranaBox = document.getElementById("toeranaBox");
+
+if(livraison && toeranaBox){
+    livraison.addEventListener("change", function(){
+        if(this.value.toLowerCase().includes("boutique")){
+            toeranaBox.style.display = "block";
+        } else {
+            toeranaBox.style.display = "none";
+        }
+    });
+}
+    }
+
+    loadProducts();
+    return;
+}
+    
+
+    function goPage2(){
+        document.getElementById("page1").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+    }
+    window.goPage2 = goPage2;
+
+    const loginButtons = document.querySelectorAll(".login-btn");
+    if(loginButtons.length > 1){
+        loginButtons[1].onclick = function(){
+            document.getElementById("page2").style.display = "none";
+            document.getElementById("page3").style.display = "block";
+        };
+    }
+const buyBtn = document.querySelector(".buy");
+
+if(buyBtn){
+    buyBtn.onclick = function(){
+        document.getElementById("page3").style.display = "none";
+        document.getElementById("page5").style.display = "block";
+        loadProducts();
+    };
+}
+    const sellBtn = document.querySelector(".sell");
+    if(sellBtn){
+        sellBtn.onclick = function(){
+            document.getElementById("page3").style.display = "none";
+            document.getElementById("page4").style.display = "block";
+        };
+    }
+
+
+
+});
+
+
+/* AJOUTER DANS SCRIMENT :*/
+
+function goBack(page){
+
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page3").style.display = "none";
+    document.getElementById("page4").style.display = "none";
+    document.getElementById("page5").style.display = "none";
+
+    const servicePage = document.getElementById("servicePage");
+    if(servicePage){
+        servicePage.style.display = "none";
+    }
+
+    document.getElementById("page" + page).style.display = "block";
+}
+/* AJOUTER AUSSI DANS <script> */
+
+function toggleDetails(element){
+
+    const details = element.nextElementSibling;
+
+    if(details.classList.contains("active")){
+        details.classList.remove("active");
+    } else {
+        details.classList.add("active");
+    }
+}
+function goPage4(){
+
+    const currentUser = localStorage.getItem("currentUser");
+
+    if(!currentUser){
+        alert("Veuillez créer un compte ou vous connecter.");
+        document.getElementById("page3").style.display = "none";
+        document.getElementById("page2").style.display = "block";
+        return;
+    }
+
+    document.getElementById("page3").style.display = "none";
+    document.getElementById("page4").style.display = "block";
+}
+function saveUser(){
+    const userName = document.getElementById("loginName").value.trim();
+
+    if(!userName){
+        alert("Ampidiro ny anaranao");
+        return;
+    }
+
+    localStorage.setItem("currentUser", userName.trim());
+
+    document.getElementById("page2").style.display = "none";
+    document.getElementById("page3").style.display = "block";
+}
+
+
+async function deleteProduct(productId){
+
+    const confirmDelete = confirm("Voulez-vous vraiment supprimer cette publication ?");
+
+    if(!confirmDelete) return;
+
+    await firebaseModules.deleteDoc(
+        firebaseModules.doc(db, "products", productId)
+    );
+
+    alert("Publication supprimée ✔");
+
+    loadProducts();
+}
+async function registerUser(){
+
+    const fullName = document.getElementById("loginName").value.trim();
+    const phone = document.getElementById("phoneNumber").value.trim();
+const password = document.getElementById("userPassword").value.trim();
+    if(!fullName || !phone || !password){
+        alert("Veuillez remplir tous les champs.");
+        return;
+    }
+
+    try{
+
+    const fakeEmail = phone + "@gmail.com";
+
+const userCredential = await firebaseModules.createUserWithEmailAndPassword(
+    auth,
+    fakeEmail,
+    password
+);
+
+    await firebaseModules.setDoc(
+        firebaseModules.doc(db, "users", phone),
+        {
+            uid: userCredential.user.uid,
+            fullName,
+            phone,
+            
+        }
+    );
+        localStorage.setItem("currentUser", fullName);
+        localStorage.setItem("currentPhone", phone);
+
+        alert("Compte créé avec succès ✔");
+
+        document.getElementById("page2").style.display = "none";
+        document.getElementById("page3").style.display = "block";
+
+    }catch(error){
+        alert(error.message);
+    }
+}
+
+async function loginUser(){
+
+    const phone = document.getElementById("phoneNumber").value.trim();
+const password = document.getElementById("userPassword").value.trim();
+
+    if(!phone || !password) return;
+
+    try{
+
+        const userCredential = await firebaseModules.signInWithEmailAndPassword(
+            auth,
+            phone + "@gmail.com",
+            password
+        );
+
+        const userRef = firebaseModules.doc(db, "users", phone);
+        const userSnap = await firebaseModules.getDoc(userRef);
+
+        if(!userSnap.exists()){
+            alert("Compte introuvable.");
+            return;
+        }
+
+        const userData = userSnap.data();
+
+        localStorage.setItem("currentUser", userData.fullName);
+        localStorage.setItem("currentPhone", phone);
+
+        alert("Connexion réussie ✔");
+
+        document.getElementById("page2").style.display = "none";
+        document.getElementById("page3").style.display = "block";
+
+    }catch(error){
+        alert(error.message);
+    }
+}
+async function recoverPassword(){
+
+    const phone = prompt("Entrez votre numéro téléphone");
+
+    if(!phone) return;
+
+    try{
+
+        const userRef = firebaseModules.doc(db, "users", phone);
+        const userSnap = await firebaseModules.getDoc(userRef);
+
+        if(!userSnap.exists()){
+            alert("Numéro introuvable.");
+            return;
+        }
+
+        const recoveryCode = Math.floor(100000 + Math.random() * 900000);
+
+        localStorage.setItem("recoveryCode", recoveryCode);
+
+        alert("Code envoyé automatiquement : " + recoveryCode);
+
+        const enteredCode = prompt("Entrez le code reçu");
+
+        if(enteredCode == recoveryCode){
+            alert("Mot de passe réinitialisé. Vérifiez votre compte.");
+        }else{
+            alert("Code incorrect.");
+        }
+
+    }catch(error){
+        alert("Erreur.");
+    }
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.getElementById("page5").style.display = "none";
+
+    const deliveryMethod = document.getElementById("deliveryMethod");
+    const gpsBox = document.getElementById("gpsBox");
+
+    if(deliveryMethod && gpsBox){
+
+        gpsBox.style.display = "block";
+
+        deliveryMethod.addEventListener("change", function(){
+
+            gpsBox.style.display =
+                this.value === "Boutique"
+                ? "block"
+                : "none";
+
+        });
+
+    }
+
+});
+
+function getSellerGPS() {
+    
+    const status = document.getElementById("gpsStatus");
+    
+    if (!navigator.geolocation) {
+        status.innerText = "GPS tsy supported.";
+        return;
+    }
+    
+    status.innerText = "Mitady toerana...";
+    
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            const gps = {
+    lat: position.coords.latitude,
+    lng: position.coords.longitude
+};
+
+localStorage.setItem("sellerGPS", JSON.stringify(gps));
+            status.innerText = "Toerana voaray tsara ✔";
+        },
+        () => {
+            status.innerText = "Tsy afaka nahazo localisation.";
+        }
+    );
+}
+async function saveProduct(){
+    
+
+const savedGPS = JSON.parse(localStorage.getItem("sellerGPS"));
+    
+    const product = {
+        name: document.getElementById("productName").value,
+        price: document.querySelector('input[placeholder="Vidiny (Ar)"]').value,
+        quantity: document.querySelector('input[placeholder="Isany"]').value,
+        deliveryTime: document.querySelector('input[placeholder="Alebehiny"]').value,
+        category: document.querySelector('.category-select').value,
+        material: document.querySelector('input[placeholder="Akora fototra"]').value,
+        description: document.querySelector('textarea').value,
+        typeVente: document.getElementById("typeVente").selectedOptions[0].text,
+        livraison: document.getElementById("livraison").selectedOptions[0].text,
+        toerana: document.querySelector('#toeranaBox input')?.value || "",
+        sellerName: document.querySelector('input[placeholder="Anaran\'ny mpivarotra"]').value,
+        phone: document.querySelector('#page4 input[placeholder="Numéro téléphone"]').value.trim(),
+        facebook: document.querySelector('input[placeholder="Facebook"]').value,
+        email: document.querySelector('input[type="email"]').value,
+        whatsapp: document.querySelector('input[placeholder="WhatsApp"]').value.trim(),
+        address: document.querySelector('input[placeholder="Fonenana"]').value,
+        faritra: document.getElementById("faritraSelect").value,
+        deliveryMethod: document.getElementById("deliveryMethod").value,
+shopLocationName: document.getElementById("shopLocationName")?.value || "",
+
+        image: "",
+        author: localStorage.getItem("currentUser"),
+authorId: auth.currentUser ? auth.currentUser.uid : "",
+        createdAt: Date.now()
+    };
+    if(
+!product.name.trim() ||
+!product.price.trim() ||
+!product.sellerName.trim() ||
+!product.phone.trim()
+){
+    alert("Anaran'ny vokatra, Vidiny, Anaran'ny mpivarotra, Numéro téléphone tsy maintsy fenoina.");
+    return;
+}
+
+    await firebaseModules.addDoc(
+        firebaseModules.collection(db, "products"),
+        product
+    );
+
+    alert("Vokatra voatahiry ✔");
+
+    document.getElementById("page4").style.display = "none";
+    document.getElementById("page5").style.display = "block";
+
+    loadProducts();
+}
+
+
+async function loadProducts(){
+
+    const list = document.getElementById("productList");
+    const searchInput = document.getElementById("searchInput");
+    const filterCategory = document.getElementById("filterCategory");
+    const filterFaritra = document.getElementById("filterFaritra");
+
+const snapshot = await firebaseModules.getDocs(
+    firebaseModules.collection(db, "products")
+);
+
+let products = [];
+
+snapshot.forEach(docSnap=>{
+    products.push({
+        id: docSnap.id,
+        ...docSnap.data()
+    });
+});
+    /* RESET */
+    list.innerHTML = "";
+
+    /* CHARGER TOUS LES KARAZANY UNIQUES */
+    const categories = [...new Set(
+        products
+        .map(p => p.category)
+        .filter(c => c && c.trim() !== "")
+    )];
+
+    filterCategory.innerHTML = `<option value="">Karazany rehetra</option>`;
+    categories.forEach(cat=>{
+        filterCategory.innerHTML += `<option value="${cat}">${cat}</option>`;
+    });
+/* LISTE COMPLETE KARAZANY */
+const allCategories = [
+"Sakafo masaka",
+"Fast food",
+"Zava-pisotro",
+"Mofo & pâtisserie",
+"Voankazo",
+"Legioma",
+"Akanjo lehilahy",
+"Akanjo vehivavy",
+"Akanjo ankizy",
+"Kiraro",
+"Accessoires",
+"Finday",
+"Accessoires téléphone",
+"Ordinateur",
+"TV",
+"Fanaka",
+"Haingo trano",
+"Fitaovana an-dakozia",
+"Fiara",
+"Moto",
+"Bisikileta",
+"Fikarakarana vatana",
+"Parfum",
+"Fanamboarana",
+"Service",
+"Hafa"
+];
+
+filterCategory.innerHTML = `<option value="">Karazany rehetra</option>`;
+
+allCategories.forEach(cat=>{
+    filterCategory.innerHTML += `
+        <option value="${cat}">${cat}</option>
+    `;
+});
+
+/* LISTE COMPLETE FARITRA */
+const allFaritra = [
+"Ambalavao",
+"Ambanja",
+"Ambatofinandrahana",
+"Ambatolampy",
+"Ambatondrazaka",
+"Ambilobe",
+"Ambositra",
+"Ambovombe",
+"Ambohidratrimo",
+"Ambohimahasoa",
+"Ampanihy",
+"Amparafaravola",
+"Andapa",
+"Andilamena",
+"Andramasina",
+"Anjozorobe",
+"Ankazobe",
+"Antalaha",
+"Antananarivo",
+"Antanifotsy",
+"Antsirabe",
+"Antsiranana",
+"Antsohihy",
+"Arivonimamo",
+"Bekily",
+"Belo sur Tsiribihina",
+"Betafo",
+"Brickaville",
+"Farafangana",
+"Faratsiho",
+"Fenerive Est",
+"Fenoarivobe",
+"Fianarantsoa",
+"Fort-Dauphin",
+"Ifanadiana",
+"Ihosy",
+"Ikalamavony",
+"Ikongo",
+"Ivohibe",
+"Maevatanana",
+"Mahajanga",
+"Mahanoro",
+"Maintirano",
+"Manakara",
+"Mananjary",
+"Mandoto",
+"Manjakandriana",
+"Maroantsetra",
+"Miandrivazo",
+"Miarinarivo",
+"Moramanga",
+"Morombe",
+"Morondava",
+"Mitsinjo",
+"Nosy Be",
+"Sakaraha",
+"Sambava",
+"Soalala",
+"Soanierana Ivongo",
+"Taolagnaro",
+"Toamasina",
+"Toliara",
+"Tsiroanomandidy",
+"Vangaindrano",
+"Vatomandry",
+"Vavatenina",
+"Vohemar",
+"Autre"
+];
+
+filterFaritra.innerHTML = `<option value="">Faritra rehetra</option>`;
+
+allFaritra.forEach(far=>{
+    filterFaritra.innerHTML += `
+        <option value="${far}">${far}</option>
+    `;
+});
+
+    /* FILTRAGE */
+    function displayProducts(){
+
+        list.innerHTML = "";
+
+        const search = searchInput.value.toLowerCase();
+        const selectedCategory = filterCategory.value;
+        const selectedFaritra = filterFaritra.value;
+
+        const filteredProducts = products.filter(p => {
+
+            const matchSearch =
+                (p.name || "").toLowerCase().includes(search) ||
+                (p.description || "").toLowerCase().includes(search);
+
+            const matchCategory =
+                !selectedCategory || p.category === selectedCategory;
+
+            const matchFaritra =
+                !selectedFaritra || p.faritra === selectedFaritra;
+
+            return matchSearch && matchCategory && matchFaritra;
+        });
+
+        if(filteredProducts.length === 0){
+            list.innerHTML = `
+                <div style="text-align:center;padding:60px;font-size:22px;color:#555;">
+                    Tsy misy vokatra hita.
+                </div>
+            `;
+            return;
+        }
+
+        filteredProducts.forEach(p => {
+
+            const card = document.createElement("div");
+            card.className = "product-card";
+
+            
+
+
+
+card.innerHTML = `
+
+${p.image ? `
+<img src="${p.image}" style="
+    width:100%;
+    height:260px;
+    object-fit:cover;
+">
+` : ""}
+
+<div style="padding:20px;">
+
+    <div style="
+        font-size:28px;
+        color:#ff6600;
+        font-weight:bold;
+        margin:15px 0;
+    ">
+        ${p.price || ""} Ar
+    </div>
+
+    <div style="
+        background:#f9f9f9;
+        padding:15px;
+        border-radius:12px;
+        margin-bottom:15px;
+    ">
+        <h3>📦 ${p.name || "Produit"} </h3>
+
+        <div><b>Karazany:</b> ${p.category || ""}</div>
+        <div><b>Quantité:</b> ${p.quantity || ""}</div>
+        <div><b>Akora:</b> ${p.material || ""}</div>
+        <div><b>Alebehiny:</b> ${p.deliveryTime || ""}</div>
+        <div><b>Type vente:</b> ${p.typeVente || ""}</div>
+        <div><b>Livraison:</b> ${p.livraison || ""}</div>
+        <div><b>Toerana:</b> ${p.toerana || ""}</div>
+        <div><b>Fomba fanaterana:</b> ${p.deliveryMethod || ""}</div>
+<div><b>Anaran'ny toerana:</b> ${p.shopLocationName || ""}</div>
+
+${p.gps ? `
+<a href="https://www.google.com/maps/dir/?api=1&destination=${p.gps.lat},${p.gps.lng}"
+target="_blank"
+style="
+display:block;
+margin-top:10px;
+padding:10px;
+background:orange;
+color:white;
+text-align:center;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+">
+📍 Hijery map sy itinéraire
+</a>
+
+<iframe
+width="100%"
+height="250"
+style="border:0;margin-top:10px;border-radius:12px;"
+loading="lazy"
+allowfullscreen
+src="https://www.google.com/maps?q=${p.gps.lat},${p.gps.lng}&output=embed">
+</iframe>
+` : ""}
+        <div><b>Description:</b> ${p.description || ""}</div>
+    </div>
+
+    <button onclick="toggleSellerDetails(this)" style="
+        width:100%;
+        padding:14px;
+        background:#007bff;
+        color:white;
+        border:none;
+        border-radius:10px;
+        font-weight:bold;
+        margin-bottom:10px;
+        cursor:pointer;
+    ">
+        🛒 Hividy
+    </button>
+
+
+    <div class="seller-details" style="
+        display:none;
+        background:#fff8dc;
+        padding:15px;
+        border-radius:12px;
+        border:1px solid #ffe066;
+        margin-bottom:15px;
+    ">
+        <h3>👤 Contact vendeur complet</h3>
+
+        <div><b>Anarana:</b> ${p.sellerName || ""}</div>
+
+<div>
+    <b>Téléphone:</b>
+    <a href="tel:${(p.phone || "").replace(/\D/g,'')}" 
+       style="color:blue;font-weight:bold;text-decoration:underline;">
+       ${p.phone || ""}
+    </a>
+</div>
+
+        <div>
+            <b>WhatsApp:</b>
+            <a target="_blank" href="https://wa.me/${(p.whatsapp || "").replace(/\D/g,'')}">
+                ${p.whatsapp || ""}
+            </a>
+        </div>
+
+        <div>
+            <b>Email:</b>
+            <a href="mailto:${p.email || ""}">
+                ${p.email || ""}
+            </a>
+        </div>
+
+        <div>
+            <b>Facebook:</b>
+            <a target="_blank" href="https://facebook.com/${p.facebook || ""}">
+                ${p.facebook || ""}
+            </a>
+        </div>
+
+        <div><b>Adresse:</b> ${p.address || ""}</div>
+        <div><b>Faritra:</b> ${p.faritra || ""}</div>
+    </div>
+
+    ${
+        p.author === localStorage.getItem("currentUser")
+        ? `
+        <button onclick="deleteProduct('${p.id}')" style="
+            width:100%;
+            padding:12px;
+            background:red;
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-weight:bold;
+            cursor:pointer;
+        ">
+            🗑️ Supprimer cette publication
+        </button>
+        `
+        : ""
+    }
+
+</div>
+`;
+
+            list.appendChild(card);
+        });
+    }
+
+    /* EVENTS */
+    searchInput.addEventListener("input", displayProducts);
+    filterCategory.addEventListener("change", displayProducts);
+    filterFaritra.addEventListener("change", displayProducts);
+
+    displayProducts();
+}
+function toggleSellerDetails(button){
+
+    const details = button.nextElementSibling;
+
+    if(details.style.display === "none" || details.style.display === ""){
+        details.style.display = "block";
+        button.textContent = "❌ Fermer";
+    } else {
+        details.style.display = "none";
+        button.textContent = "🛒 Hividy";
+    }
+}
+
+
+firebaseModules.onAuthStateChanged(auth, async (user) => {
+
+    if(user){
+
+        const userIdentifier = user.email.replace("@gmail.com","");
+        const usersRef = firebaseModules.doc(db, "users", userIdentifier);
+        const userSnap = await firebaseModules.getDoc(usersRef);
+
+        if(userSnap.exists()){
+
+            const userData = userSnap.data();
+
+            localStorage.setItem("currentUser", userData.fullName);
+            localStorage.setItem("currentPhone", userData.phone);
+
+            document.getElementById("page1").style.display = "none";
+            document.getElementById("page2").style.display = "none";
+            document.getElementById("page3").style.display = "block";
+            document.getElementById("page4").style.display = "none";
+            document.getElementById("page5").style.display = "none";
+        }
+
+    }
+
+});
+function toggleManualLocation() {
+    const choice = document.getElementById("locationChoice").value;
+    document.getElementById("manualLocation").style.display =
+        choice === "manual" ? "block" : "none";
+}
+</script>
+
+
+
+<div id="servicePage" class="page" style="display:none; padding:20px;">
+
+<button onclick="goBack(3)" class="back-btn">⬅ Retour</button>
+
+    <h2>📍 Hijery Toerana sy Service</h2>
+
+    <p>
+        Mora kokoa ho anao ny mijery toerana iray toy ny hoe hopitaly,
+        hotely, tobin-tsolika, na mpanamboatra fiara, sns,
+        ary miaraka amin'ny contact eo ambany.
+   </p>
+
+<select id="serviceType">
+
+    <option value="atm">1. 🏧 ATM / Distributeur</option>
+    <option value="bank">2. 🏦 Banque</option>
+    <option value="barber">3. 💈 Barber</option>
+    <option value="cash_point">4. 💵 Cash point</option>
+    <option value="clinic">5. 🏥 Clinique</option>
+    <option value="hairdresser">6. 💇 Coiffure</option>
+    <option value="dentist">7. 🦷 Dentiste</option>
+    <option value="road_assistance">8. 🚨 Dépannage</option>
+    <option value="doctor">9. 🩺 Docteur</option>
+    <option value="church">10. ⛪ Fiangonana</option>
+    <option value="garage">11. 🔧 Garage automobile (réparation)</option>
+    <option value="bodyshop">12. 🎨 Garage mandoko</option>
+    <option value="bus_station">13. 🚌 Gare routière</option>
+    <option value="other">14. 📍 Hafa</option>
+    <option value="hospital">15. 🏥 Hôpital</option>
+    <option value="hotel">16. 🏨 Hôtel</option>
+    <option value="budget_hotel">17. 🛏️ Hotely tsotra</option>
+    <option value="tourism">18. 📸 Lieu touristique</option>
+    <option value="car_rental">19. 🚗 Location voiture</option>
+    <option value="lycee">20. 🎓 Lycée</option>
+    <option value="mechanic">21. 🛠️ Mécanicien</option>
+    <option value="pharmacy">22. 💊 Pharmacie</option>
+    <option value="fire_station">23. 🚒 Pompiers</option>
+    <option value="police">24. 👮 Poste de police</option>
+    <option value="quincaillerie">25. 🔩 Quincaillerie</option>
+    <option value="phone_repair">26. 📱 Réparation téléphone</option>
+    <option value="restaurant">27. 🍴 Restaurant</option>
+    <option value="gym">28. 🏋️ Salle de sport</option>
+    <option value="fuel">29. ⛽ Station service</option>
+    <option value="supermarket">30. 🛒 Supermarché</option>
+    <option value="house_rental">31. 🏠 Trano azo hofaina</option>
+    <option value="university">32. 🏛️ Université</option>
+    <option value="veterinary">33. 🐾 Vétérinaire</option>
+    <option value="vulcanisation">34. 🛞 Vulca (pneu)</option>
+    <option value="wc">35. 🚻 WC public</option>
+
+</select>
+
+<select id="locationChoice" class="input" onchange="toggleManualLocation()">
+    <option value="near">Izay akaiky ahy indrindra</option>
+    <option value="manual">Hampiditra toerana</option>
+</select>
+
+<input type="text"
+       id="manualLocation"
+       placeholder="Ampidiro toerana..."
+       class="input"
+       style="display:none;">
+
+    <button onclick="searchNearbyServices()"
+            style="
+                width:100%;
+                padding:14px;
+                margin-top:10px;
+                background:#ff4fa3;
+                color:white;
+                border:none;
+                border-radius:10px;
+                font-weight:bold;">
+        🔍 Hitady Service
+    </button>
+
+    <div id="serviceResults" style="margin-top:20px;"></div>
+
+</div>
+</html>
