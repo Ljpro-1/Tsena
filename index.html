@@ -1376,60 +1376,46 @@ sorted.slice(0, 15).forEach(place => {
 
     const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
 
-    resultsBox.innerHTML += `
-    <div style="
-        background:white;
-        padding:15px;
-        margin:10px 0;
-        border-radius:12px;
-        box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    ">
+    const card = document.createElement("div");
 
-        <h3>📍 ${name}</h3>
+card.style = `
+    background:white;
+    padding:15px;
+    margin:10px 0;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+`;
 
-        <p><b>📞 Contact:</b> ${phone}</p>
+card.innerHTML = `
+    <h3>📍 ${name}</h3>
+    <p><b>📞 Contact:</b> ${phone}</p>
+    <p><b>📏 Distance:</b> ${distance} km</p>
+    <p><b>🕒 Horaire:</b> ${opening}</p>
 
-${
-phone !== "Tsy misy"
-? `
-<a href="tel:${phone.replace(/\s+/g,'')}"
-   style="
-        display:inline-block;
-        margin-top:8px;
+    <a href="${mapLink}" target="_blank"
+       style="display:block;margin-top:10px;background:#28a745;color:white;padding:10px;border-radius:8px;text-align:center;">
+       🗺️ Voir sur Maps
+    </a>
+`;
+
+if(phone !== "Tsy misy"){
+    const callBtn = document.createElement("a");
+    callBtn.href = "tel:" + phone.replace(/\s+/g,'');
+    callBtn.innerText = "📞 Appeler";
+    callBtn.style = `
+        display:block;
+        margin-top:10px;
         background:#007bff;
         color:white;
-        padding:10px 15px;
+        padding:10px;
         border-radius:8px;
-        text-decoration:none;
+        text-align:center;
         font-weight:bold;
-   ">
-   📞 Antsoy
-</a>
-`
-: ""
+    `;
+    card.appendChild(callBtn);
 }
 
-        <p><b>📏 Distance:</b> ${distance} km</p>
-
-        <p><b>🕒 Horaire:</b> ${opening}</p>
-
-        <a href="${mapLink}"
-           target="_blank"
-           style="
-                display:inline-block;
-                margin-top:10px;
-                background:#28a745;
-                color:white;
-                padding:10px 15px;
-                border-radius:8px;
-                text-decoration:none;
-                font-weight:bold;
-           ">
-           🗺️ Hijery Google Map
-        </a>
-
-    </div>
-    `;
+resultsBox.appendChild(card);
 });
 
     } catch(error) {
