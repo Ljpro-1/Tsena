@@ -1343,15 +1343,19 @@ relation${f.substring(4)}(around:80000,${phoneLat},${phoneLon});
 
 
 distance: calculateDistance(
-    phoneLat,
-    phoneLon,
+    searchLat,
+    searchLon,
     place.lat || place.center?.lat,
     place.lon || place.center?.lon
 )
             }))
             .sort((a,b) => a.distance - b.distance);
 
-        resultsBox.innerHTML = "";
+        
+        resultsBox.innerHTML = `
+📍 Recherche basée sur : ${locationChoice === "manual" ? manualLocation : "Votre position actuelle"}
+<hr>
+`;
 
 sorted.slice(0, 15).forEach(place => {
 
