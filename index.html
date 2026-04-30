@@ -720,7 +720,7 @@ window.firebaseModules = {
 <!-- PAGE 4 : HIVAROTRA PRO -->
 <div id="page4">
     <!-- PAGE 4 : AJOUTER juste après <div id="page4"> -->
-<button onclick="goBack(3)" class="back-btn">⬅ Retour</button>
+<button onclick="backToService()" class="back-btn">⬅ Retour</button>
 
     <div class="sell-container">
 
@@ -1299,9 +1299,9 @@ relation${f.substring(4)}(around:15000,${searchLat},${searchLon});
         [out:json][timeout:25];
         (
             ${selectedFilters.map(f => `
-${f}(around:15000,${phoneLat},${phoneLon});
-way${f.substring(4)}(around:30000,${phoneLat},${phoneLon});
-relation${f.substring(4)}(around:30000,${phoneLat},${phoneLon});
+${f}(around:15000,${searchLat},${searchLon});
+way${f.substring(4)}(around:30000,${searchLat},${searchLon});
+relation${f.substring(4)}(around:30000,${searchLat},${searchLon});
 `).join("\n")}
         );
         out body;
@@ -1530,6 +1530,8 @@ if(livraison && toeranaBox){
 
 
 /* AJOUTER DANS SCRIMENT :*/
+
+
 
 function goBack(page){
 
@@ -2161,6 +2163,7 @@ font-weight:bold;
     }
 
 </div>
+
 `;
 
             list.appendChild(card);
@@ -2249,7 +2252,7 @@ async function getAccuratePosition() {
                     // Si précision excellente ou 3 essais atteints
                     if (current.accuracy <= 50 || attempts >= 3) {
 
-                        if (bestPosition.accuracy > 150) {
+if (bestPosition.accuracy > 300) {
                             reject("GPS tsy marina (faible précision)");
                         } else {
                             resolve(bestPosition);
@@ -2274,11 +2277,78 @@ async function getAccuratePosition() {
         tryGetPosition();
     });
 }
+function openAddServicePage() {
+    document.getElementById("servicePage").style.display = "none";
+    document.getElementById("addServicePage").style.display = "block";
+}
+
+async function getServiceGPS() {
+
+    const status = document.getElementById("serviceGpsStatus");
+
+    status.innerText = "📡 Mitady GPS...";
+
+    try {
+        const gps = await getAccuratePosition();
+
+        localStorage.setItem("serviceGPS", JSON.stringify(gps));
+
+        status.innerText = "✅ GPS azo ✔";
+
+    } catch (err) {
+
+        localStorage.removeItem("serviceGPS");
+
+        status.innerText = "❌ Tsy azo GPS";
+
+    }
+}
+async function saveService() {
+    
+    const service = {
+        type: document.getElementById("newServiceType").value,
+        place: document.getElementById("servicePlace").value,
+        gps: localStorage.getItem("serviceGPS") ?
+            JSON.parse(localStorage.getItem("serviceGPS")) :
+            null,
+        phone: document.getElementById("servicePhone").value,
+        email: document.getElementById("serviceEmail").value,
+        facebook: document.getElementById("serviceFacebook").value,
+        whatsapp: document.getElementById("serviceWhatsapp").value,
+        hours: document.getElementById("serviceHours").value,
+        createdAt: Date.now()
+    };
+    
+    if (!service.type || !service.place) {
+        alert("Fenoy ny service sy toerana");
+        return;
+    }
+    if(!service.gps){
+    if(!confirm("Tsy misy GPS, te hanohy ve ianao ?")){
+        return;
+    }
+}
+    
+    await firebaseModules.addDoc(
+        firebaseModules.collection(db, "services"),
+        service
+    );
+    
+    alert("Service voatahiry ✔");
+    
+    document.getElementById("addServicePage").style.display = "none";
+    document.getElementById("servicePage").style.display = "block";
+    localStorage.removeItem("serviceGPS");
+}
+function backToService(){
+    document.getElementById("addServicePage").style.display = "none";
+    document.getElementById("servicePage").style.display = "block";
+}
 </script>
 
 
 
-<div id="servicePage" class="page" style="display:none; padding:20px;">
+<div></div><div id="servicePage" class="page" style="display:none; padding:20px;">
 
 <button onclick="goBack(3)" class="back-btn">⬅ Retour</button>
 
@@ -2353,8 +2423,61 @@ async function getAccuratePosition() {
                 font-weight:bold;">
         🔍 Hitady Service
     </button>
+    <div id="serviceResults" style="margin-top:15px;"></div>
+<button onclick="openAddServicePage()"
+        style="
+            width:100%;
+            padding:14px;
+            margin-top:10px;
+            background:#007bff;
+            color:white;
+            border:none;
+            border-radius:10px;
+            font-weight:bold;">
+    ➕ Ampiditra Service
+</button>
 
-    <div id="serviceResults" style="margin-top:20px;"></div>
+</div>
+<div id="addServicePage" style="display:none; padding:20px;">
+
+<button onclick="goBack(3)" class="back-btn">⬅ Retour</button>
+
+<h2>➕ Ampiditra Service</h2>
+
+<p>
+ireto ny zavatra tokony ataonao sy azonao atao:
+mampiditra ny service-nao ianao,
+ny anaran'ny toerana misy anao.
+(Ampidiro ny position géographique mba anamorana ny fijerena ny toerana misy anao)
+Mampiditra ny contact anao ( izay ananana )
+</p>
+
+<select id="newServiceType">
+<option value="">Safidio service</option>
+<option value="restaurant">Restaurant</option>
+<option value="hotel">Hotel</option>
+<option value="pharmacy">Pharmacie</option>
+<option value="garage">Garage</option>
+<option value="bank">Banque</option>
+<option value="hospital">Hopital</option>
+<option value="fuel">Station service</option>
+<option value="supermarket">Supermarché</option>
+<option value="other">Hafa</option>
+</select>
+
+<input type="text" id="servicePlace" placeholder="Anaran'ny toerana">
+
+<button onclick="getServiceGPS()">📍 Ampiditra GPS</button>
+<p id="serviceGpsStatus"></p>
+
+<input type="text" id="servicePhone" placeholder="Téléphone">
+<input type="email" id="serviceEmail" placeholder="Email">
+<input type="text" id="serviceFacebook" placeholder="Facebook">
+<input type="text" id="serviceWhatsapp" placeholder="WhatsApp">
+
+<input type="text" id="serviceHours" placeholder="Fotoana hiasana">
+
+<button onclick="saveService()">🚀 Hampiditra Service</button>
 
 </div>
 </html>
